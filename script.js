@@ -14,6 +14,13 @@ const btn3 = document.getElementById('btn3');
 const btn4 = document.getElementById('btn4');
 const btn5 = document.getElementById('btn5');
 const buttonsArr = [btn1, btn2, btn3, btn4, btn5];
+const rightSound = new Audio('./right.mp3');
+const wrongSound = new Audio('./wrong.mp3');
+const rainbow_dashSound = new Audio('./rainbow_dash.mp3');
+const kittenSound = new Audio('./kitten.mp3');
+const morganaSound = new Audio('./morgana.mp3');
+let character;
+
 let currentNumber = 0
 let answer = 0;
 let generatedNumbers = [];
@@ -64,30 +71,44 @@ function check(e) {
     console.log(e.target.innerText);
     let p = document.createElement('p');
     if (+e.target.innerText == +answer) {
+        rightSound.play();
         result = true;
         streak++;
         p.innerHTML = `[${currentRound + 1}] - ${currentSeconds} секунд - Правильно!`;
         p.style.color = 'green';
     } else {
+        wrongSound.play();
         result = false;
         streak = 0;
         secondsSum += PENALTY;
         p.innerHTML = `[${currentRound + 1}] - ${currentSeconds} секунд - Неверно!`;
         p.style.color = 'red';
     }
-    logs_container.appendChild(p);
+    logs_container.insertBefore(p, logs_container.firstChild);
     averageTime = secondsSum / rounds;
     average_container.innerText = `среднее время: ${averageTime.toFixed(2)}`;
     if (streak >= 10) {
+        if (character != 'morgana') {
+            morganaSound.play();
+            character = 'morgana';
+        }
         emotion_container.src = './morgana.png';
         emotion_container.style.display = 'block';
     } else if (streak >= 7) {
         emotion_container.src = './luna.png';
         emotion_container.style.display = 'block';
     } else if (streak >= 5) {
+        if (character != 'kitten') {
+            kittenSound.play();
+            character = 'kitten';
+        }
         emotion_container.src = './kitten.png';
         emotion_container.style.display = 'block';
     } else if (streak >= 3) {
+        if (character != 'rainbow') {
+            rainbow_dashSound.play();
+            character = 'rainbow';
+        }
         emotion_container.src = './rainbow_dash.png';
         emotion_container.style.display = 'block';
     } else {
