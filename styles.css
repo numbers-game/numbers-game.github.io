@@ -39,16 +39,16 @@
 .warning {
     z-index: 1;
     position: absolute;
-    left:5%;
-    font-size: 60pt;
+    left:50px;
+    font-size: 50pt;
     font-family: Arial, Helvetica, sans-serif;
 }
 
 .average {
     z-index: 1;
     position: absolute;
-    right:15%;
-    top: 70%;
+    right:60px;
+    top: 500px;
     font-size: 32pt;
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -57,7 +57,7 @@
     z-index: 1;
     height: 230px;
     position: absolute;
-    right: 20%;
+    right: 100px;
     display: none;
 }
 
