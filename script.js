@@ -5,7 +5,7 @@ const average_container = document.getElementById('average');
 const emotion_container = document.getElementById('emotion');
 
 
-const NUMBER = 2;
+const NUMBER = +prompt("Какую таблицу тренировать?") || 2;
 const BUTTONS_COUNT = 5;
 const PENALTY = 5;
 const btn1 = document.getElementById('btn1');
@@ -74,7 +74,7 @@ function check(e) {
         rightSound.play();
         result = true;
         streak++;
-        p.innerHTML = `[${currentRound + 1}] - ${currentSeconds} секунд - Правильно!`;
+        p.innerHTML = `[${currentRound + 1}] - (${task_text.innerText}) ${currentSeconds} секунд - Правильно!`;
         p.style.color = 'green';
     } else {
         wrongSound.play();
