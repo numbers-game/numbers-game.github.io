@@ -120,12 +120,13 @@ function check(e) {
     if (result) {
         warning_container.style.color = 'green';
         warning_container.innerText = 'ПРАВИЛЬНО'
+        run();
+
     } else {
         warning_container.style.color = 'red';
         warning_container.innerText = 'НЕВЕРНО'
     }
 
-    run();
 }
 
 function startTimer() {
