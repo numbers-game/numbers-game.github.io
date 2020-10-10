@@ -5,7 +5,7 @@ const average_container = document.getElementById('average');
 const emotion_container = document.getElementById('emotion');
 
 
-const NUMBER = +prompt("Какую таблицу тренировать?") || 2;
+const NUMBER = Math.abs(+prompt("Какую таблицу тренировать?")) || 2;
 const ANSWERS_SOUNDS = confirm("Включить звуки ответов??");
 const HEROES_SOUNDS = confirm("Включить звуки героев?");
 const BUTTONS_COUNT = 5;
@@ -49,12 +49,13 @@ function randomIn(min, max) {
 }
 
 function generateButtons(answer) {
+    const cap = answer + 5 <= 20 ? answer + 5 : 20;
     generatedNumbers[randomIn(0, BUTTONS_COUNT - 1)] = answer;
     for (let i = 0; i < BUTTONS_COUNT; i++) {
         if (!generatedNumbers[i]) {
-            let newNumber = randomIn(answer-10, answer+10);
+            let newNumber = randomIn(0, cap);
             while (newNumber == answer) {
-                newNumber = randomIn(answer - 10, answer + 10);
+                newNumber = randomIn(0, cap);
             }
             generatedNumbers[i] = newNumber;
         }
@@ -73,13 +74,13 @@ function check(e) {
     console.log(e.target.innerText);
     let p = document.createElement('p');
     if (+e.target.innerText == +answer) {
-        ANSWERS_SOUNDS ? rightSound.play(): null;
+        ANSWERS_SOUNDS ? rightSound.play() : null;
         result = true;
         streak++;
         p.innerHTML = `[${currentRound + 1}] - (${task_text.innerText} = ${e.target.innerText}) ${currentSeconds} секунд - Правильно!`;
         p.style.color = 'green';
     } else {
-        ANSWERS_SOUNDS ? wrongSound.play(): null;
+        ANSWERS_SOUNDS ? wrongSound.play() : null;
         result = false;
         streak = 0;
         secondsSum += PENALTY;
