@@ -6,6 +6,8 @@ const emotion_container = document.getElementById('emotion');
 
 
 const NUMBER = +prompt("Какую таблицу тренировать?") || 2;
+const ANSWERS_SOUNDS = confirm("Включить звуки ответов??");
+const HEROES_SOUNDS = confirm("Включить звуки героев?");
 const BUTTONS_COUNT = 5;
 const PENALTY = 5;
 const btn1 = document.getElementById('btn1');
@@ -50,9 +52,9 @@ function generateButtons(answer) {
     generatedNumbers[randomIn(0, BUTTONS_COUNT - 1)] = answer;
     for (let i = 0; i < BUTTONS_COUNT; i++) {
         if (!generatedNumbers[i]) {
-            let newNumber = randomIn(0, 10);
+            let newNumber = randomIn(answer-10, answer+10);
             while (newNumber == answer) {
-                newNumber = randomIn(0, 10);
+                newNumber = randomIn(answer - 10, answer + 10);
             }
             generatedNumbers[i] = newNumber;
         }
@@ -71,40 +73,40 @@ function check(e) {
     console.log(e.target.innerText);
     let p = document.createElement('p');
     if (+e.target.innerText == +answer) {
-        rightSound.play();
+        ANSWERS_SOUNDS ? rightSound.play(): null;
         result = true;
         streak++;
-        p.innerHTML = `[${currentRound + 1}] - (${task_text.innerText} = ${answer}) ${currentSeconds} секунд - Правильно!`;
+        p.innerHTML = `[${currentRound + 1}] - (${task_text.innerText} = ${e.target.innerText}) ${currentSeconds} секунд - Правильно!`;
         p.style.color = 'green';
     } else {
-        wrongSound.play();
+        ANSWERS_SOUNDS ? wrongSound.play(): null;
         result = false;
         streak = 0;
         secondsSum += PENALTY;
-        p.innerHTML = `[${currentRound + 1}] - (${task_text.innerText} = ${answer}) ${currentSeconds} секунд - Неверно!`;
+        p.innerHTML = `[${currentRound + 1}] - (${task_text.innerText} = ${e.target.innerText}) ${currentSeconds} секунд - Неверно!`;
         p.style.color = 'red';
     }
     logs_container.insertBefore(p, logs_container.firstChild);
     averageTime = secondsSum / rounds;
     average_container.innerText = `среднее время: ${averageTime.toFixed(2)}`;
     if (streak >= 10) {
-        if (character != 'morgana') {
+        if (character != 'morgana' && HEROES_SOUNDS) {
             morganaSound.play();
             character = 'morgana';
         }
         emotion_container.src = './morgana.png';
         emotion_container.style.display = 'block';
-    } else if (streak >= 7) {
+    } else if (streak >= 7 && HEROES_SOUNDS) {
         emotion_container.src = './luna.png';
         emotion_container.style.display = 'block';
-    } else if (streak >= 5) {
+    } else if (streak >= 5 && HEROES_SOUNDS) {
         if (character != 'kitten') {
             kittenSound.play();
             character = 'kitten';
         }
         emotion_container.src = './kitten.png';
         emotion_container.style.display = 'block';
-    } else if (streak >= 3) {
+    } else if (streak >= 3 && HEROES_SOUNDS) {
         if (character != 'rainbow') {
             rainbow_dashSound.play();
             character = 'rainbow';
