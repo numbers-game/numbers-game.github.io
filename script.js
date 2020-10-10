@@ -74,14 +74,14 @@ function check(e) {
         rightSound.play();
         result = true;
         streak++;
-        p.innerHTML = `[${currentRound + 1}] - (${task_text.innerText}) ${currentSeconds} секунд - Правильно!`;
+        p.innerHTML = `[${currentRound + 1}] - (${task_text.innerText} = ${answer}) ${currentSeconds} секунд - Правильно!`;
         p.style.color = 'green';
     } else {
         wrongSound.play();
         result = false;
         streak = 0;
         secondsSum += PENALTY;
-        p.innerHTML = `[${currentRound + 1}] - ${currentSeconds} секунд - Неверно!`;
+        p.innerHTML = `[${currentRound + 1}] - (${task_text.innerText} = ${answer}) ${currentSeconds} секунд - Неверно!`;
         p.style.color = 'red';
     }
     logs_container.insertBefore(p, logs_container.firstChild);
