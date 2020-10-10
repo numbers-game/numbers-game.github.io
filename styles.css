@@ -1,0 +1,70 @@
+.container {
+    width: 960px;
+    margin: 0 auto;
+}
+
+.task-container {
+    margin-top: 50px;
+    background-color: azure;
+    width: 100%;
+    height: 200px;
+    position: relative;
+    text-align: center;
+    line-height: 200px;
+
+}
+
+.task-text {
+    font-size: 62pt;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.button-container {
+    background-color: rgb(238, 238, 238);
+    width: 100%;
+    height: 200px;
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+}
+
+.answer-button {
+    width: 180px;
+    background-color: white;
+    font-size: 62pt;
+
+}
+
+.warning {
+    z-index: 1;
+    position: absolute;
+    left:5%;
+    font-size: 60pt;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.average {
+    z-index: 1;
+    position: absolute;
+    right:15%;
+    top: 70%;
+    font-size: 32pt;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.emotion {
+    z-index: 1;
+    height: 230px;
+    position: absolute;
+    right: 20%;
+    display: none;
+}
+
+.logs-container {
+    /* background-color: rgb(170, 170, 170); */
+    width: 100%;
+    margin-top: 50px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18pt;
+}
