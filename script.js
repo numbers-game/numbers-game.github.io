@@ -42,7 +42,7 @@ if (!NUMBER) {
 function run() {
     generatedNumbers = [null, null, null, null, null];
     if (isRandom) {
-        NUMBER = randomIn(0,10);
+        NUMBER = randomIn(-9,9);
     }
     if (NUMBER > 0) {
         currentNumber = randomIn(0, 10);
