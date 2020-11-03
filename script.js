@@ -4,8 +4,7 @@ const warning_container = document.getElementById('warning');
 const average_container = document.getElementById('average');
 const emotion_container = document.getElementById('emotion');
 
-
-const NUMBER = +prompt("Какую таблицу тренировать?") || 2;
+let NUMBER = +prompt("Какую таблицу тренировать?");
 const ANSWERS_SOUNDS = confirm("Включить звуки ответов??");
 const HEROES_SOUNDS = confirm("Включить звуки героев?");
 const BUTTONS_COUNT = 5;
@@ -27,7 +26,6 @@ const ryujiSound = new Audio('./ryuji.mp3');
 const yusukeSound = new Audio('./yusuke.mp3');
 
 let character;
-
 let currentNumber = 0
 let answer = 0;
 let generatedNumbers = [];
@@ -36,9 +34,16 @@ let averageTime = 0;
 let secondsSum = 0;
 let rounds = 0;
 let streak = 0;
+let isRandom = false;
+if (!NUMBER) {
+    isRandom = true;
+}
 
 function run() {
     generatedNumbers = [null, null, null, null, null];
+    if (isRandom) {
+        NUMBER = randomIn(0,10);
+    }
     if (NUMBER > 0) {
         currentNumber = randomIn(0, 10);
         task_text.innerText = `${currentNumber} + ${NUMBER}`;
