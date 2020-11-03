@@ -21,6 +21,11 @@ const wrongSound = new Audio('./wrong.mp3');
 const rainbow_dashSound = new Audio('./rainbow_dash.mp3');
 const kittenSound = new Audio('./kitten.mp3');
 const morganaSound = new Audio('./morgana.mp3');
+const jokerSound = new Audio('./joker.mp3');
+const annSound = new Audio('./ann.mp3');
+const ryujiSound = new Audio('./ryuji.mp3');
+const yusukeSound = new Audio('./yusuke.mp3');
+
 let character;
 
 let currentNumber = 0
@@ -34,11 +39,11 @@ let streak = 0;
 
 function run() {
     generatedNumbers = [null, null, null, null, null];
-    if (NUMBER>0) {
+    if (NUMBER > 0) {
         currentNumber = randomIn(0, 10);
         task_text.innerText = `${currentNumber} + ${NUMBER}`;
     } else {
-        currentNumber = randomIn(0+ Math.abs(NUMBER), 10+ Math.abs(NUMBER));
+        currentNumber = randomIn(0 + Math.abs(NUMBER), 10 + Math.abs(NUMBER));
         task_text.innerText = `${currentNumber} - ${Math.abs(NUMBER)}`;
     }
     answer = currentNumber + NUMBER;
@@ -95,26 +100,61 @@ function check(e) {
     logs_container.insertBefore(p, logs_container.firstChild);
     averageTime = secondsSum / rounds;
     average_container.innerText = `среднее время: ${averageTime.toFixed(2)}`;
-    if (streak >= 10) {
-        if (character != 'morgana' && HEROES_SOUNDS) {
-            morganaSound.play();
+    if (streak >= 30) {
+        if (character != 'yusuke') {
+            if (HEROES_SOUNDS)
+                yusukeSound.play();
+            character = 'yusuke';
+        }
+        emotion_container.src = './yusuke.png';
+        emotion_container.style.display = 'block';
+    } else if (streak >= 25) {
+        if (character != 'ryuji') {
+            if (HEROES_SOUNDS)
+                ryujiSound.play();
+            character = 'ryuji';
+        }
+        emotion_container.src = './ryuji.png';
+        emotion_container.style.display = 'block';
+    } else if (streak >= 20) {
+        if (character != 'ann') {
+            if (HEROES_SOUNDS)
+                annSound.play();
+            character = 'ann';
+        }
+        emotion_container.src = './ann.png';
+        emotion_container.style.display = 'block';
+    } else if (streak >= 15) {
+        if (character != 'joker') {
+            if (HEROES_SOUNDS)
+                jokerSound.play();
+            character = 'joker';
+        }
+        emotion_container.src = './joker.png';
+        emotion_container.style.display = 'block';
+    }else if (streak >= 10) {
+        if (character != 'morgana') {
+            if (HEROES_SOUNDS)
+                morganaSound.play();
             character = 'morgana';
         }
         emotion_container.src = './morgana.png';
         emotion_container.style.display = 'block';
-    } else if (streak >= 7 && HEROES_SOUNDS) {
+    } else if (streak >= 7) {
         emotion_container.src = './luna.png';
         emotion_container.style.display = 'block';
-    } else if (streak >= 5 && HEROES_SOUNDS) {
+    } else if (streak >= 5) {
         if (character != 'kitten') {
-            kittenSound.play();
+            if (HEROES_SOUNDS)
+                kittenSound.play();
             character = 'kitten';
         }
         emotion_container.src = './kitten.png';
         emotion_container.style.display = 'block';
-    } else if (streak >= 3 && HEROES_SOUNDS) {
+    } else if (streak >= 3) {
         if (character != 'rainbow') {
-            rainbow_dashSound.play();
+            if (HEROES_SOUNDS)
+                rainbow_dashSound.play();
             character = 'rainbow';
         }
         emotion_container.src = './rainbow_dash.png';
