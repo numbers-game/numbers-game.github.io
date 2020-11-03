@@ -5,7 +5,7 @@ const average_container = document.getElementById('average');
 const emotion_container = document.getElementById('emotion');
 
 
-const NUMBER = Math.abs(+prompt("Какую таблицу тренировать?")) || 2;
+const NUMBER = +prompt("Какую таблицу тренировать?") || 2;
 const ANSWERS_SOUNDS = confirm("Включить звуки ответов??");
 const HEROES_SOUNDS = confirm("Включить звуки героев?");
 const BUTTONS_COUNT = 5;
@@ -34,9 +34,15 @@ let streak = 0;
 
 function run() {
     generatedNumbers = [null, null, null, null, null];
-    currentNumber = randomIn(0, 10);
-    task_text.innerText = `${currentNumber} + ${NUMBER}`;
+    if (NUMBER>0) {
+        currentNumber = randomIn(0, 10);
+        task_text.innerText = `${currentNumber} + ${NUMBER}`;
+    } else {
+        currentNumber = randomIn(0+ Math.abs(NUMBER), 10+ Math.abs(NUMBER));
+        task_text.innerText = `${currentNumber} - ${Math.abs(NUMBER)}`;
+    }
     answer = currentNumber + NUMBER;
+    console.log(answer);
     generateButtons(answer);
     startTimer();
 }
@@ -52,7 +58,7 @@ function generateButtons(answer) {
     const cap = answer + 5 <= 20 ? answer + 5 : 20;
     generatedNumbers[randomIn(0, BUTTONS_COUNT - 1)] = answer;
     for (let i = 0; i < BUTTONS_COUNT; i++) {
-        if (!generatedNumbers[i]) {
+        if (generatedNumbers[i] == null) {
             let newNumber = randomIn(0, cap);
             while (newNumber == answer) {
                 newNumber = randomIn(0, cap);
@@ -71,7 +77,6 @@ function check(e) {
     let currentSeconds = endTimer();
     secondsSum += currentSeconds;
     rounds++;
-    console.log(e.target.innerText);
     let p = document.createElement('p');
     if (+e.target.innerText == +answer) {
         ANSWERS_SOUNDS ? rightSound.play() : null;
